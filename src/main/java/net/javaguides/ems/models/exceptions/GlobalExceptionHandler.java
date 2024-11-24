@@ -30,6 +30,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(AnnouncementNotFoundException.class)
+    public ResponseEntity<String> handleAnnouncementNotFound(AnnouncementNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
     // handle other exceptions as needed
     @ExceptionHandler(Exception.class)
