@@ -1,4 +1,4 @@
-package net.javaguides.ems.exception;
+package net.javaguides.ems.models.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

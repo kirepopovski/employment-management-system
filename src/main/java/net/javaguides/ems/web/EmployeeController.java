@@ -1,9 +1,9 @@
-package net.javaguides.ems.controller;
+package net.javaguides.ems.web;
 
 import lombok.AllArgsConstructor;
-import net.javaguides.ems.dto.EmployeeDto;
-import net.javaguides.ems.entity.Employee;
+import net.javaguides.ems.models.dto.EmployeeDto;
 import net.javaguides.ems.service.EmployeeService;
+import net.javaguides.ems.utils.ValidationUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +15,16 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     // Build Add Employee REST API
     @PostMapping
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto) {
+        // Centralized validations
+        ValidationUtil.validatePositiveNumber("Salary", employeeDto.getSalary());
+        ValidationUtil.validateNonEmptyString("First Name", employeeDto.getFirstName());
+        ValidationUtil.validateNonEmptyString("Last Name", employeeDto.getLastName());
+
         EmployeeDto savedEmployee = employeeService.createEmployee(employeeDto);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }

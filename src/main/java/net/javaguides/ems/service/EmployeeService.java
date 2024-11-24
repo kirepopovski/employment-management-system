@@ -1,6 +1,6 @@
 package net.javaguides.ems.service;
 
-import net.javaguides.ems.dto.EmployeeDto;
+import net.javaguides.ems.models.dto.EmployeeDto;
 
 import java.util.List;
 
